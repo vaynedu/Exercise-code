@@ -1,0 +1,83 @@
+给定字符串，可以通过插入字符，使其变成回文，求最少插入字符的数量。例如：ab最少插入1个字符，变为bab；aa最少插入0个字符；abcd最少插入3个字符，dcbabcd。
+
+分析：首尾指针法——设两个指针pBegin和pEnd分别指向字符串的首尾，比较首尾指针指向的值，这时会有种情况：
+
+
+   1）*pBegin==*pEnd 则二者均向中间移动，即pBegin++;pEnd--;
+
+
+   2）*pBegin!=*pEnd,则有两种处理方法：一、在pEnd后插入和*pBegin相等的字符，然后pBegin++继续比较，统计剩余字符插入数量；二、在pBegin钱插入和*pEnd相等的字符，然后pEnd--继续比较，统计剩余字符插入数量。最少插入字符的数量即为一和二两种情况的最小者。
+
+重复上面的过程，直到pBegin和pEnd相遇。
+
+
+#include<stdio.h>
+#include<string.h>
+
+int minChange(char *str,char *pBegin,char *pEnd)
+{
+     if (str==NULL||pBegin==NULL||pEnd==NULL)
+     {
+     	return -1;
+     }
+     else if (*str=='\0'||pBegin>=pEnd)
+     {
+     	return 0;
+     }
+     else{
+     	//*pBegin==*pEnd则二者均向中间移动，即pBegin++；pEnd--;
+     	while(pBegin<pEnd&&*pBegin==pEnd)
+     	{
+     		pBegin++;
+     		pEnd--;
+     	}
+     	//*pBegin!=*pEnd,判断是在pBegin前插入还是在pEND后插入
+     	if(pBegin<pEnd)
+     	{
+     		int min1 = minChange(str,pBegin,pEnd-1);
+     		int min2 = minChange(str,pBegin+1,pEnd);
+     		return min1<min2?min1+1:min2+1;
+
+     	}
+     	else{
+     		return 0;
+     	}
+     }
+
+}
+
+int main(int argc, char const *argv[])
+{
+	int min,n;
+	char *pBegin=NULL,*pEnd=NULL;
+	char str[100];
+    gets(str);
+    n=strlen(str);
+    pBegin=str;
+    pEnd=&str[n-1];
+    min = minChange(str,pBegin,pEnd);
+    printf("最少添加%d个字符\n",min);
+	return 0;
+}
+
+
+
+1.有A到J十个人手拉手构成一个环，其中A和B不相邻，问一共有多少种排列方式？ 
+  解：基本的环排列算法。公式：N!/N(N 即为参与排列的人）
+
+  就本题而言，首先十个人环排列10!/10 ，然后将AB当成一个人进行环排列9!*2!/9
+
+  排除AB相邻的即为答案：10!/10 -9!*2!/9
+
+
+
+.五只猴子分桃。半夜，第一只猴子先起来，它把桃分成了相等的五堆，多出一只。于是，它吃掉了一个，拿走了一堆； 第二只猴子起来一看，只有四堆桃。于是把四堆合在一起，分成相等的五堆，又多出一个。于是，它也吃掉了一个，拿走了一堆；.....其他几只猴子也都是 这样分的。问：这堆桃至少有多少个？（朋友说，这是小学奥数题）。
+  参考答案：先给这堆桃子加上4个,设此时共有X个桃子,最后剩下a个桃子.这样: 
+  第一只猴子分完后还剩:(1-1/5)X=(4/5)X; 
+  第二只猴子分完后还剩:(1-1/5)2X;
+  第三只猴子分完后还剩:(1-1/5)3X;
+  第四只猴子分完后还剩:(1-1/5)4X;
+  第五只猴子分完后还剩:(1-1/5)5X=(1024/3125)X;
+  得:a=(1024/3125)X;
+  要使a为整数,X最小取3125.
+  减去加上的4个,所以,这堆桃子最少有3121个。

@@ -1,0 +1,128 @@
+#include <stdio.h>
+#include <windows.h>
+#include <string.h>
+
+#define MAXLEN 500
+
+
+int a[MAXLEN];
+int b[MAXLEN];
+
+
+void find_multify_value(int *a,int n,int *end)
+{
+      int i = 0;
+	  int j = 0;
+	  int len = 0;
+	  int incr = 2;
+	  int left = n;
+
+
+	  if(n == 0 || n == 1 || n == 2 || n == 3 || n == 4){	         
+		   a[0] = n;
+		   *end = 1;
+		   return ;
+	  }//end if
+
+	  a[0] = 1;
+
+	  while(left >= incr){
+		  a[i++] = incr;
+		  left -= incr;
+		  incr++;
+	  }//end while
+
+	  len = i;
+
+	  //printf("len = %d,left = %d\n",len,left);
+
+	  if(left != n && left != 0){
+		  while(left){
+			  if(i <= 0){
+			     i = len;
+			  }
+			  a[--i]++;
+			  left--;
+		  }//end while
+	  }//end if
+      
+      *end = len;
+}
+
+void calculate_array(int *a,int *b,int end,int *start)
+{
+	int i = 0;
+	int temp = 0;
+	int j = MAXLEN - 1;
+	int k = MAXLEN - 2;
+    int carry_bit = 0;
+
+	b[j] = 1;
+
+	for(i = 0; i < end; i++){
+		for(j = MAXLEN -1; j > k; j--){
+	       temp = b[j] * a[i] + carry_bit;
+	       b[j] = temp % 10;
+		   carry_bit = temp / 10;
+		}//end for  
+		while(carry_bit){
+		   b[k--] += carry_bit % 10;
+		   carry_bit /= 10;
+		}//end while
+	}//end for
+	*start = k + 1;
+
+}
+
+void print_mutify_array(int *a,int end)
+{
+     int i = 0;
+
+	 for(i = 0;i < end; i++){
+	    printf("%d ",a[i]);
+	 }//end for
+	 printf("\n");
+}
+
+void print_multify_value(int *b,int start)
+{
+	int i = 0;
+
+	for(i = start; i < MAXLEN; i++){
+	     printf("%d",b[i]);
+	}//end for
+	printf("\n");
+
+}
+int main(int argc,char *argv[])
+{
+	int n = 0;
+	int start = 0;
+	int end = 0;
+
+	freopen("D:\\out.txt","w",stdout);
+	//while(scanf("%d",&n) != EOF){
+      
+	for(n = 1; n <= 100; n++){
+        
+		printf("n = %d\n",n);
+
+		find_multify_value(a,n,&end);
+
+		calculate_array(a,b,end,&start);
+
+		print_mutify_array(a,end);
+		
+		print_multify_value(b,start);
+
+		memset(a,0x00,sizeof(a));
+		memset(b,0x00,sizeof(b));
+
+		//	getchar();
+
+	    //	Sleep(1500);
+	}//end for
+
+       
+	return 0;
+}

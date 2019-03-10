@@ -1,0 +1,40 @@
+//完全背包
+#include <iostream>
+using namespace std;
+const int w[] = {0,2,2,6,5,4};//物品的重量，其中0号位置不使用。   
+const int v[] = {0,6,3,5,4,6};//物品对应的待加，0号位置置为空。
+const int n = sizeof(w)/sizeof(w[0]) - 1 ; //n为物品的个数
+const int max = 10; 
+int main(){
+	int i, j, k, m[max + 1] = {0};
+	cout.width(2);
+	for (i = 0; i <= max; i++){
+		if (i >= w[n]){
+			m[i] = v[n];
+		}
+	}
+		for (k = 0; k <= max; k++){
+			cout.width(3);
+			cout << m[k];
+		}
+		cout << endl;
+	for (i = n - 1; i >= 1; i--){		//遍历物品链
+		for (j = 1; j <= max; j++){		//遍历背包空间链
+			if (w[i] <= j){			//能放下就放较大的
+				
+				if (m[j] < (m[j - w[i]] + v[i])) m[j] = m[j - w[i]] + v[i];
+			}
+		}
+		for (k = 0; k <= max; k++){
+			cout.width(3);
+			cout << m[k];
+		}
+		cout << endl;
+		
+		
+	}
+	
+
+	
+	return 0;
+}

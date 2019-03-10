@@ -1,0 +1,212 @@
+#include<iostream>
+
+void cimi(int n){
+	int num=0,i=0,j,k;
+	int a[32];
+	while(n){
+		j=n%2;
+		if(j==1)  a[num++]=i;
+		i++; 
+		n/=2; 
+	}
+	for(i=num-1;i>=0;i--){
+	if(a[i]==0)  printf("2(0)");
+	else if(a[i]==1)  printf("2");
+	else if(a[i]==2)  printf("2(2)");
+	else if(a[i]>2){
+	
+	   printf("2(");
+	   cimi(a[i]);     
+	   printf(")");
+       }
+    if(i!=0)  printf("+");
+    }
+	      
+} 
+int main()
+{
+     int n;
+     while(scanf("%d",&n)!=EOF){
+     	cimi(n);
+     	printf("\n");
+     }	
+	return 0;
+}
+*******************************************************************
+
+#include<stdio.h>
+#include<math.h>
+ int let[26];
+ void deal1(char str[]){
+ 	int i=0;
+ 	while(str[i]!='\0')	{
+ 		if(str[i]>='A'&&str[i]<='Z')
+ 		  str[i]+=32;
+ 		if(str[i]>='a'&&str[i]<='z')
+ 		  let[str[i]-97]++;
+ 		i++;
+ 	}
+ }
+ void deal2(char str[]){
+ 		int i=0;
+ 	while(str[i]!='\0')	{
+ 		if(str[i]>='A'&&str[i]<='Z')
+ 		  str[i]+=32;
+ 		if(str[i]>='a'&&str[i]<='z')
+ 		  let[str[i]-97]--;
+ 		i++;
+ 	}
+ }
+int main()
+{ 
+   
+	char word1[81],word2[81];
+     int i,sum=0;
+     while(scanf("%s %s",word1,word2)!=EOF){
+   
+     deal1(word1);
+     deal2(word2);
+     for(i=0;i<26;i++)
+        sum+=abs(let[i]);   
+    if(sum==0)
+          printf("YES\n");
+    else
+       printf("NO\n");
+     	
+     	
+     	
+     }
+
+       
+       return 0;
+	
+  
+}
+************************************************************
+#include <stdio.h>
+int main()
+{ 
+	long long n,k,T;
+	long long i=1,number=1,sum=0;
+	while(scanf("%I64d%I64d%I64d",&n,&k,&T)!=EOF){
+
+	for(i=1;i<=T;i++)
+	{
+	      if(i==1)	number=1;
+	      else
+		number=(number+(((i-2)*n+1)+(i-1)*n)*n/2)%k;
+	      sum+=number;
+	}
+	printf("%I64d\n",sum);
+		}
+	return 0;
+}
+***************************************************************
+#include <stdio.h>
+#include <string.h>
+struct substr
+{
+	int start,len,times;
+}arr[2000];
+int rear=0,cmp=0,front=0;
+int compare(char *sub1,char *sub2,int len)
+{
+	int i;
+	for(i=0;i<len;i++)
+	{
+
+		if(*(sub1+i)!=*(sub2+i))
+			return 0;
+	}
+	return 1;
+}
+
+int main(void)   {
+     int len,upper,i,L,n,j;
+     char S[61],result[61];
+     int max,bond;
+     scanf("%d",&L);
+     getchar(); 
+     gets(S);       n=strlen(S);
+     for ( len=L ; len<=n ; len++ )	{
+	    arr[rear].start=0;
+    	arr[rear].len=len;
+    	arr[rear].times=1;
+    	front=rear;
+    	rear++;
+     for ( i=1 ; i<=n-len ;i++) {
+       cmp=front;
+       while(cmp<rear)  {
+	    
+		if(compare(S+i,S+arr[cmp].start,len)==1) 
+		 {
+		arr[cmp].times++;	break;
+	      }
+	    else	cmp++;
+     }
+	if(cmp==rear)  		{
+		arr[rear].start=i;
+	   	arr[rear].len=len;
+	    	arr[rear].times=1;
+		rear++;
+	         }
+	}
+
+     }
+     bond=0,max=arr[0].times;
+	for(i=1;i<rear;i++)
+	if(max<arr[i].times)	{
+		bond=i;
+		max=arr[i].times;
+	}
+	for(i=arr[bond].start;i<arr[bond].start+arr[bond].len;i++)
+	result[i-arr[bond].start]=S[i];
+	result[i-arr[bond].start]='\0';
+	
+	     printf("%s\n",result);
+     return 0;
+}
+ *****************************************************************************
+#include<stdio.h>
+#include<stdlib.h>
+
+int main()  
+{  
+   int a[35][35]={0};
+   int i,j;
+   int n;
+   scanf("%d",&n);
+   for(i=0;i<n;i++)
+   {
+   	  a[i][i]=1;
+   	  a[i][0]=1;
+   	  
+   	  for(j=0;j<=i;j++)
+   	   if(j-1>=0&&i-1>=0)
+   	     a[i][j]=a[i-1][j-1]+a[i-1][j];
+   	     
+   }     
+    for(i=0;i<n;i++)
+    {
+     for(j=0;j<=i;j++)
+        printf("%d ",a[i][j]);
+      printf("\n");	
+    	
+    	
+    }  
+    return 0;  
+}  
+
+
+
+
+
+
+
+
+
+
+
+
+
+

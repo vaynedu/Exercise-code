@@ -1,0 +1,109 @@
+1.给定数组A，大小为n，数组元素为1到n的数字，不过有的数字出现了多次，有的数字没有出现。请设计算法和程序，统计哪些数字没有出现，哪些数字出现了多少次。能够在O(n)的时间复杂度，O(1)的空间复杂度要求下完成么？
+
+首先，我们介绍一种三次遍历数组的方法,我们都考虑数组从0开始：
+?第一次遍历：对于每一个a[i] = a[i] * n
+?第二次遍历：对于每一个i，++a[a[i]/n]
+?第三次遍历：对于每一个i，a[i] % n就是出现次数
+a[i]应该出现在a中的a[i]位置，乘以n、再除以n，很容易的来回变换；第二次遍历，对于a[i]本来所在的位置不断增1，但绝对不对超出n的，那每一个i出现的次数，就是a[i]对n取余。
+
+#include<iostream>
+
+using namespace std;
+
+int a[10000];
+
+void repetitions(int a[], int n)  
+{  
+    int i = 1;  
+	for(i = 1; i <= n; ++i)  
+		a[i] *= n;  
+	for(i = 1; i <= n; ++i){  
+		++a[a[i]/n];  
+        
+	}  
+	for(i = 1; i <= n; ++i){  
+		cout << i << "出现了" << a[i] % n << "次" << endl;  
+	}  
+}
+int main()
+{
+    int n=10;
+	int i;
+	for(i=1;i<=n;i++)
+		scanf("%d",a+i);
+
+	repetitions(a,n);
+	for(i=1;i<=n;i++)
+	printf("%d ",a[i]);
+	return 0;
+}
+
+
+
+
+#include<iostream>
+
+using namespace std;
+
+int a[10000];
+
+/*void repetitions(int a[], int n)  
+{  
+    int i = 1;  
+	for(i = 1; i <= n; ++i)  
+		a[i] *= n;  
+	for(i = 1; i <= n; ++i){  
+		++a[a[i]/n];  
+        
+	}  
+	for(i = 1; i <= n; ++i){  
+		cout << i << "出现了" << a[i] % n << "次" << endl;  
+	}  
+}
+int main()
+{
+    int n=10;
+	int i;
+	for(i=1;i<=n;i++)
+		scanf("%d",a+i);
+
+	repetitions(a,n);
+	for(i=1;i<=n;i++)
+	printf("%d ",a[i]);
+	return 0;
+}*/
+
+void GetNums(int a[],int n)
+{
+    if(a==NULL||n<=0)
+    {
+        return;
+    }
+    else
+    {
+        for(int i=0;i<n;i++)
+        {
+            //a[a[i]%n]+=n;//仔细研读处理技巧
+			a[a[i]%n]=a[a[i]%n]+n;
+			printf("%d ",a[a[i]%n]);
+		
+        }
+        for(i=1;i<n;i++)
+        {
+           cout<<i<<":"<<(a[i]-1)/n<<endl;//思考为什么要减1（提示：数组中数据全部是N）
+        }
+         cout<<n<<":"<<(a[0]-1)/n<<endl;
+    }
+}
+int main()
+{
+    int n=10;
+	int i;
+	for(i=0;i<n;i++)
+		scanf("%d",a+i);
+
+	 GetNums(a,n);
+for(i=0;i<n;i++)
+	printf("%d ",a[i]);
+	return 0;
+}

@@ -1,0 +1,91 @@
+#include <stdio.h>
+#include <string.h>
+
+#define MAXLEN  500
+int a[MAXLEN];
+
+
+void factorial(int *a,int n,int *start)
+{
+	int i = 0;
+	int j = 0;
+    int temp = 0;
+	int carry_bit = 0;
+	int k = MAXLEN - 2;
+    int factorial_num = 2;
+
+    a[MAXLEN - 1] = 1;
+
+	for(i = 1; i < n; i++){
+		for(j = MAXLEN - 1; j > k;j--){
+		     temp = a[j] * factorial_num + carry_bit;
+			 a[j] = temp % 10;
+			 carry_bit = temp /10;
+		}//end for
+
+		while(carry_bit){
+		     a[k--] += carry_bit % 10;
+			 carry_bit /= 10;
+		}//end for
+
+		factorial_num++;
+	}//end for
+	
+	*start = k;
+
+}
+
+void print_array(int *a,int start)
+{
+     int i = 0;
+
+	 for(i = start + 1; i < MAXLEN; i++){
+	     printf("%d",a[i]);
+	 }//end for
+
+	 printf("\n");
+}
+
+
+int main(int argc,char *argv[])
+{
+    int n = 0;
+	int start = 0;
+
+	scanf("%d",&n);
+
+	factorial(a,n,&start);
+
+    print_array(a,start);
+
+	return 0;
+}
+
+
+#include <stdio.h>
+#include <math.h>
+
+int main(int argc,char *argv[])
+{
+	int i = 0;
+	int n = 0;
+	int k = 5;
+    int count = 0;
+ 
+	while(scanf("%d",&n) != EOF){
+
+  		for(i = 1; i <= n; i++){
+    
+			for(k = 5; k <=pow(5,10); k *= 5){
+				if(i % k == 0){
+				   count++;
+				}
+			}
+		}
+		printf("%d\n",count);
+
+		count = 0;
+	}
+
+	return 0;
+}
