@@ -1,0 +1,130 @@
+/*
+     这是之前的简单工厂模式演化而来 
+     工厂模式 
+
+*/
+#include <iostream>
+
+using namespace std;
+
+class Product{
+	public:
+		virtual void operation()=0;
+		~Product(){
+		}
+}; 
+class ProductA:public Product{
+	public:
+		void operation(){
+			cout<<"西红柿炒鸡蛋"<<endl;
+		}
+		~ProductA(){
+		}
+		
+};
+class ProductB:public Product{
+	public:
+		void operation(){
+			cout<<"炒饼丝"<<endl;
+		}
+		~ProductB(){
+		}
+};
+class ProductC:public Product{
+	public:
+		void operation(){
+			cout<<"香嘴鱼"<<endl;
+		}
+		~ProductC(){
+		}
+};
+class ProductD:public Product{
+	public:
+		void operation(){
+			cout<<"6元麻辣烫"<<endl;
+		}
+		~ProductD(){
+		}
+};
+class ProductE:public Product{
+	public:
+		void operation(){
+			cout<<"岐山臊子面"<<endl;
+		}
+		~ProductE(){
+		}
+};
+class ProductF:public Product{
+	public:
+		void operation(){
+			cout<<"肉夹馍"<<endl;
+		}
+		~ProductF(){
+		}
+};
+class Factory{
+	protected:
+		Product *p; 
+	public:
+        virtual void dofun()=0;
+        
+};
+class FactoryA:public Factory{
+	public:
+		FactoryA(Product *t){
+			p=t;
+		}
+		void dofun(){
+			p->operation();
+		}
+};
+class FactoryB:public Factory{
+	public:
+		FactoryB(Product *t){
+			p=t;
+		}
+		void dofun(){
+			p->operation();
+		}
+};
+int main(int argc, char** argv) {
+      //创建一个基类指针指向一个西红柿炒鸡蛋的对象 
+	  Product *pA = new ProductA();
+	  //创建一个基类指针指向一个炒饼丝的对象
+	  Product *pB = new ProductB();
+       //创建一个基类指针指向一个岐山臊子面的对象
+	  Product *pE = new ProductE();
+	   //创建一个基类指针指向一个肉夹馍的对象
+	  Product *pF = new ProductF();
+	   //创建工厂的指针 
+	  Factory *pFa1 = new FactoryA(pA);
+	  
+	  Factory *pFa2 = new FactoryA(pB);
+ 
+      Factory *pFa3 = new FactoryB(pE);
+	  
+	  Factory *pFa4 = new FactoryB(pF);	  
+	  
+	  cout<<"输出工厂FactoryA老婆做的饭菜"<<endl;
+	  pFa1->dofun();
+	  
+	  pFa2->dofun();
+	  
+	  cout<<"输出工厂FactoryB老婆做的饭菜"<<endl;
+	  pFa3->dofun();
+	  
+	  pFa4->dofun();
+	  
+	  
+	
+	  delete pA;
+	  delete pB;
+	  delete pE;
+	  delete pF;
+	  delete pFa1;
+      delete pFa2;
+	  delete pFa3;
+	  delete pFa4;
+	
+	return 0;
+}

@@ -1,0 +1,39 @@
+#include <iostream>
+using namespace std;
+
+
+class Adaptee{
+	public:
+		void Request(){
+			cout<<"我调用一下第三方类的方法"<<endl;
+		}
+    };
+
+// 一定要先定义后使用
+
+class Base{	
+	public:
+	  virtual void process()=0;
+};
+class Derived:public Base{
+	
+	
+};
+class Adapter:public Base{
+	private:
+		Adaptee a;
+	public:
+		void process(){
+		 a.Request();
+		}
+};
+
+int main(int argc, char** argv) {
+	Base *pBase = new Adapter();
+	pBase->process();
+	delete pBase;
+	
+	
+	
+	return 0;
+}

@@ -1,0 +1,77 @@
+/*
+   这是桥接模式，把抽象和实现相分离
+   并且用了保护继承  
+*/ 
+
+#include <iostream>
+
+using namespace std;
+class AbstractionImp{
+	public:
+		virtual void operation()=0;
+        ~AbstractionImp(){}
+};
+class ConcreteAbstractionImpA:public AbstractionImp{
+	void operation(){
+		cout<<"ConcreteAbstractionImpA正在运行中。。。"<<endl;
+	}
+	~ConcreteAbstractionImpA(){}
+};
+class ConcreteAbstractionImpB:public AbstractionImp{
+	void operation(){
+		cout<<"ConcreteAbstractionImpB正在运行中。。。"<<endl;
+	}
+	~ConcreteAbstractionImpB(){}
+};
+class Abstraction{
+	protected:
+		AbstractionImp *pAb;
+	public:
+		virtual void operation()=0;
+		~Abstraction(){}
+};
+class DefinedAbstractionA:public Abstraction{
+	public:
+		DefinedAbstractionA(AbstractionImp *t){
+			pAb=t;
+		}
+		void operation(){
+			pAb->operation();
+			cout<<"DefinedAbstractionA调用完毕"<<endl;
+		}
+		~DefinedAbstractionA(){}
+};
+class DefinedAbstractionB:public Abstraction{
+	public:
+		DefinedAbstractionB(AbstractionImp *t){
+			pAb=t;
+		}
+		void operation(){
+			pAb->operation();
+			cout<<"DefinedAbstractionB调用完毕"<<endl;
+		}
+		~DefinedAbstractionB(){}
+};
+
+//客户端	
+int main(int argc, char** argv) {
+	//创建一个 ConcretAbtractionImpA的对象并用基类指针指上去 
+	AbstractionImp *pImpA = new ConcreteAbstractionImpA();
+	//创建一个 ConcretAbtractionImpB的对象并用基类指针指上去 
+	AbstractionImp *pImpB = new ConcreteAbstractionImpB();
+	
+	Abstraction *pAb1 = new DefinedAbstractionA(pImpB);
+	
+	Abstraction *pAb2 = new DefinedAbstractionB(pImpA);
+	
+	pAb1->operation();
+	
+	pAb2->operation();
+	
+	delete pImpA;
+	delete pImpB;
+	delete pAb1;
+	delete pAb2;
+	
+	return 0;
+}

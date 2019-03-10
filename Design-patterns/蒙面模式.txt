@@ -1,0 +1,61 @@
+#include <iostream>
+#include<vector>
+
+using namespace std;
+
+class Abstractproduct{
+	public:
+		virtual void production()=0;
+};
+class productA:public Abstractproduct{
+	public:
+		void production(){
+			cout<<"productA的productionB正在运行"<<endl;
+		}
+};
+class productB:public Abstractproduct{
+	public:
+		void production(){
+			cout<<"productB的productionB正在运行"<<endl;
+		}
+};
+class productC:public Abstractproduct{
+	public:
+		void production(){
+			cout<<"productC的productionC正在运行"<<endl;
+		}
+};
+class Facade{
+	private:
+		productA *pA;
+		productB *pB;
+		productC *pC;
+	public:
+	    Facade(productA *ta,productB *tb,productC *tc){
+	    	pA=ta;
+	    	pB=tb;
+	    	pC=tc;
+	    }
+		void production(){
+		     pB->production();
+			 pC->production();
+			 pA->production();	
+		}
+};
+int main(int argc, char** argv) {
+    
+    	productC *pC = new productC();
+    	productA *pA = new productA();
+    	productB *pB = new productB();
+
+        Facade *pfc = new Facade(pA,pB,pC);
+        
+        pfc->production();
+		 
+        delete pA;
+        delete pB;
+        delete pC;
+        delete pfc;
+    
+	return 0;
+}

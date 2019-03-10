@@ -1,0 +1,68 @@
+/*
+   装饰模式 Decorator pattern
+   
+*/ 
+
+
+#include <iostream>
+
+using namespace std;
+
+// 基类 
+class Component{
+	public:
+		virtual void operation()=0;
+}; 
+//主功能 
+class ConcreteComponent:public Component{
+	public:
+		void operation(){
+			cout<<"主功能ConcreteComponent运行中。。。"<<endl;
+		}
+};
+//装饰的基类 
+class Decorator : public Component{
+	protected:
+		Component *pc;
+	public:
+		
+		void operation(){}
+		
+};
+class DecoratorA:public Decorator{
+	public:
+		DecoratorA ( Component *t )
+		{ pc = t; }
+		void operation(){
+			pc->operation();
+			cout<<"辅助功能DecoratorA运行中。。。"<<endl;
+		}
+};
+class DecoratorB:public Decorator{
+	public:
+		DecoratorB ( Component *t )
+		{ pc = t; }
+		void operation(){
+			pc->operation();
+			cout<<"辅助功能DecoratorB运行中。。。"<<endl;
+		}
+};
+int main(int argc, char** argv) {
+	
+	Component *pcom = new ConcreteComponent();
+	
+	Component *pB = new DecoratorB(pcom);
+	
+	Component *pA = new DecoratorA(pB);
+	
+	pA->operation();
+	
+	delete pcom;
+  
+    delete pB;
+	
+	delete pA;
+	
+		
+	return 0;
+}

@@ -1,0 +1,78 @@
+/*
+     简单工厂模式 
+  
+
+*/
+#include <iostream>
+
+using namespace std;
+
+class Product{
+	public:
+		virtual void operation()=0;
+		~Product(){
+		}
+}; 
+class ProductA:public Product{
+	public:
+		void operation(){
+			cout<<"西红柿炒鸡蛋"<<endl;
+		}
+		~ProductA(){
+		}
+		
+};
+class ProductB:public Product{
+	public:
+		void operation(){
+			cout<<"炒饼丝"<<endl;
+		}
+		~ProductB(){
+		}
+};
+class ProductC:public Product{
+	public:
+		void operation(){
+			cout<<"香嘴鱼"<<endl;
+		}
+		~ProductC(){
+		}
+};
+class Factory{
+	protected:
+		Product *p; 
+	public:
+		Factory(Product *t){
+			p=t;
+		}
+		void operation(){
+			p->operation();
+		}
+		~Factory(){
+		}
+};
+int main(int argc, char** argv) {
+      //创建一个基类指针指向一个西红柿炒鸡蛋的对象 
+	  Product *pA = new ProductA();
+	  //创建一个基类指针指向一个炒饼丝的对象
+	  Product *pB = new ProductB();
+	   //创建工厂的指针 
+	  Factory *pFa1 = new Factory(pA);
+	  
+	  Factory *pFa2 = new Factory(pB);
+	  
+	  
+	  pFa1->operation();
+	  
+	  pFa2->operation();
+	  
+	  
+	
+	  delete pA;
+	  delete pB;
+	  delete pFa1;
+      delete pFa2;
+	
+	
+	return 0;
+}

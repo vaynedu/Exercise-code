@@ -1,0 +1,83 @@
+#include <iostream>
+using namespace std;
+
+class Base{
+	public:
+		virtual void fun()=0;
+		virtual ~Base(){} 
+};
+class Proxy:public Base{
+	private:
+		Base *pBase;
+	public:
+		void fun(){
+			pBase->fun();
+		} 
+		~Proxy(){}
+};
+class Derived:public Base{
+	public:
+		void fun(){
+			cout<<"调用Derived的fun（）了"<<endl;
+		}
+		~Derived(){}
+};
+int main(int argc, char** argv) {
+	
+	Proxy *pProxy;
+	
+	pProxy->fun();
+	
+	return 0;
+}
+
+
+//典型的指针错误，关键指针没有指向
+
+#include <iostream>
+using namespace std;
+
+class Base{
+	public:
+		virtual void fun()=0;
+		virtual ~Base(){
+		 cout<<"调用Base的析构函数"<<endl;
+		} 
+};
+class Proxy:public Base{
+	private:
+		Base *pBase;
+	public:
+		Proxy(Base *t){
+			pBase=t;
+		}
+		void fun(){
+			pBase->fun();
+		} 
+		~Proxy(){
+		cout<<"调用Proxy的析构函数"<<endl;
+		}
+};
+class Derived:public Base{
+	public:
+		void fun(){
+			cout<<"调用Derived的fun（）了"<<endl;
+		}
+		~Derived(){
+		cout<<"调用Derived的析构函数"<<endl;
+		}
+};
+int main(int argc, char** argv) {
+	
+	Derived *pD=new Derived();
+	
+	//Proxy
+	Base *pBase =new Proxy(pD); 
+	
+	pBase->fun();
+	
+	delete pD;
+	delete pBase;
+	
+	return 0;
+}
