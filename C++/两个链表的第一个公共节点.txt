@@ -1,0 +1,54 @@
+//本来这道题目很简单，但是呢，这竟然没有设置头结点
+
+class Solution {
+public:
+    ListNode* FindFirstCommonNode( ListNode *pHead1, ListNode *pHead2) {
+        int len = 0;
+        int len1 = 0;
+        int len2 = 0;
+        ListNode *p_node = NULL;
+        ListNode *q_node = NULL;
+        
+        if(pHead1 == NULL || pHead2 == NULL){
+            return NULL;
+        }
+        
+        p_node = pHead1;
+        q_node = pHead2;
+        
+        while(p_node){
+            len1++;
+            p_node = p_node->next;
+        }
+        while(q_node){
+            len2++;
+            q_node = q_node->next;
+        }
+        
+        p_node = pHead1;
+        q_node = pHead2;
+        
+        if(len1 == len2){
+             len = 0;
+        }else if(len1 > len2){
+            len = len1 - len2;
+            while(len--){
+                p_node = p_node->next;
+            }
+        }else{
+            len = len2 - len1;
+            while(len--){
+                q_node = q_node->next;
+            }
+        }
+        
+        while(q_node && p_node){
+          if(q_node == p_node){
+              return q_node;
+          }
+          q_node = q_node->next;
+          p_node = p_node->next;
+         }
+         return NULL;
+    }
+};

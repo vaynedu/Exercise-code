@@ -1,0 +1,74 @@
+小Q最近遇到了一个难题：把一个字符串的大写字母放到字符串的后面，各个字符的相对位置不变，且不能申请额外的空间。
+
+
+#include <stdio.h>
+#include <string.h>
+ 
+int main()
+{
+     int i = 0;
+     int j = 0;
+     int str_len = 0;
+     int flag = 0;
+     char temp;
+     char str[1001] = {0};
+ 
+ 
+    while(scanf("%s",str)!=EOF){
+    
+ 
+        str_len = strlen(str);
+ 
+        for(i = str_len -1; i >= 0; i--){
+            if(str[i] >= 'A' && str[i] <= 'Z'){
+                temp = str[i];
+                for(j = i; j < str_len - 1 - flag; j++){
+                     str[j] = str[j+1];
+                }
+                str[j] = temp;
+                flag++;
+            }
+        }
+ 
+        printf("%s\n",str);
+        memset(str,'\0',1001);
+        flag = 0;
+    }
+ 
+    return 0;
+}
+
+
+
+
+
+
+
+#include <iostream>
+#include <string>
+#include <string.h>
+
+using namespace std;
+int main()
+{
+	string s;
+	while(cin >> s){
+		if(s.length() >= 1 && s.length() <= 1000){
+			for(int i = 0; i < s.length(); i++){
+				if(s[i] >= 'a' && s[i] <= 'z'){
+				     cout << s[i]; 
+				}
+			}
+			for(i = 0; i < s.length(); i++){
+				if(s[i] >= 'A' && s[i] <= 'Z'){
+				     cout << s[i]; 
+				}
+			}
+			cout << endl;
+		}
+	}
+	return 0;
+}
+
+
+
