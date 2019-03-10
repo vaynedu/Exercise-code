@@ -1,0 +1,7 @@
+1 进入主目录使用make直接编译，到bin目录下./mysort 运行
+
+2 make clean 清除编译好的可执行文件和动态库
+
+
+
+目的：练习makefile和动态库的编写
