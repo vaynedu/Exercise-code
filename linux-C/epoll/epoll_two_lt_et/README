@@ -1,0 +1,7 @@
+1.在网络编程中使用read函数可能会报如下错误： Resource temporarily unavailable 
+   一般在read返回 -1时会遇到这种情况 错误码：EAGAIN或者EWOULDBLOCK 
+  遇到这种情况可能有两种原因： 
+  1. 在非阻塞socket上调用了阻塞操作 
+  2. 远程客户端关了socket连接
+
+2.et模式触发的次数要比lt少的多，因此高效，而不是缺省

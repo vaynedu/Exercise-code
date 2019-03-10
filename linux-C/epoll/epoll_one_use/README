@@ -1,0 +1,8 @@
+
+ 1. 进入主目录make，然后在bin下./epoll_one_use执行
+
+ 2.make clean 清除
+
+
+
+ 熟悉epoll的使用，工作原理，IO多路复用
