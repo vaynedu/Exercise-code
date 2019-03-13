@@ -24,3 +24,6 @@ g_date_timestamp.append(today_time_stamp-24*3600)
 
 print g_date
 print g_date_timestamp
+
+#['20190314', '20190313']
+#[1552579199, 1552492800, 1552492799, 1552406400]
