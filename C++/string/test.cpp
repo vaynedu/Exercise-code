@@ -31,6 +31,7 @@ int main(int argc, char *argv[])
 
      cout << "str2 == str3 : "  << ((str2 == str3) ? "==" : "!=" )<< endl;
 
+     cout << "str1 length : " << str1.getLength() << endl;
 
      return 0;
 }

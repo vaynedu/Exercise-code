@@ -124,6 +124,10 @@ ostream & operator<<(ostream &output, const myString &str)
 }
 
 
+int myString::getLength()
+{
+   return strlen(m_data);
+}
 
 
 #endif  /* _MYSTRING_H_ */
