@@ -4,6 +4,10 @@
 
 using namespace std;
 
+//compile
+//g++ test.cpp -o test  && ./test
+
+
 int main(int argc, char *argv[])
 {
      myString str;
