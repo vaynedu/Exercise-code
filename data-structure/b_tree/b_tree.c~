@@ -1,0 +1,12 @@
+//B树的操作接口
+
+void      create_b_tree(B_tree root, int *array)    ;   //B树的创建
+void      destroy_b_tree(B_tree root)               ;    //B树的销毁
+//从以当前节点为根节点的子树中，寻找key_value所在的节点
+Tree_node *b_tree_search(B_tree root, int key_value);   
+//在b_tree中加入新的关键字
+void      b_tree_insert(B_tree root, int key_value) ; 
+//从以当前节点为根节点的树中删除key_value关键字
+void      b_tree_delete(B_tree root, int key_value) ;
+void      print_b_tree(B_tree root)                 ;    //打印B树信息
+
