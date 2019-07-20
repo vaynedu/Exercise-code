@@ -26,12 +26,14 @@
  * 2. 链表
  * 3. 递归
  *
+ * 备注：没有考虑异常边界情况，最重要的思路
  *
  * */
 
 
 #include<stdio.h>
 
+#include<stdlib.h> // for malloc/free
 
 void ysfh_array(int *a, int n, int m)
 {
@@ -85,6 +87,81 @@ void ysfh_array(int *a, int n, int m)
 
 }
 
+/*
+ * 使用链表实现约瑟夫环
+ *
+ * */
+
+typedef struct ds_list_s ds_list_t;
+
+struct ds_list_s
+{
+  int data;     
+  ds_list_t  *next;
+};	
+
+ds_list_t  *init_ysfh_list(int *a, int n)
+{
+	ds_list_t *head = NULL;
+	ds_list_t *cur = NULL;
+    ds_list_t *tail = NULL;;
+
+    head = (ds_list_t*)malloc(sizeof(ds_list_t));
+	head->data = a[0];
+	head->next = NULL;
+
+	tail = head;
+
+	int i;
+	for(i = 1; i < n; i++)
+	{	
+    	cur = (ds_list_t*)malloc(sizeof(ds_list_t));
+		cur->data = a[i];
+		cur->next = NULL;
+
+		tail->next = cur;
+		tail = tail->next;
+
+	}
+
+	tail->next = head;
+
+	return head;
+
+}
+
+void ysfh_list(int *a, int n, int m)
+{
+	ds_list_t *head = init_ysfh_list(a, n);
+	ds_list_t *cur = NULL;
+
+
+	int idx = 0;
+	int cnt = 1;
+
+    while(head->next != head)
+	{
+	    if(cnt == m - 1)
+		{
+		   cur = head->next;
+		   printf("idx:%d %d\n", ++idx, cur->data);
+		   
+		   head->next = cur->next;
+		   free(cur);
+		   cnt = 0;
+
+		}
+		
+		cnt++;
+		head = head->next;
+	}
+
+    printf("idx:%d %d\n", ++idx, head->data);
+    free(head);	
+}
+
+
+
 int main()
 {
     int n = 5;
@@ -99,11 +176,11 @@ int main()
 		a[i] = i + 1;
 	}
     
-	ysfh_array(a, n, m);
+//	ysfh_array(a, n, m);
 
-	// ysfh_list(a, n, m);
+    ysfh_list(a, n, m);
 
-	// ysfh_recursive(a, n, m);
+	// printf("%d\n", ysfh_recursive(n, m));
 
 
 
