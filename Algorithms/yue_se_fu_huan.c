@@ -162,6 +162,18 @@ void ysfh_list(int *a, int n, int m)
 
 
 
+int ysfh_recursive(int n, int m)
+{
+    if(n == 1)
+    {
+        return 1;
+    }
+
+    return (ysfh_recursive(n-1, m) + m - 1) % n + 1;
+}
+
+ 
+
 int main()
 {
     int n = 5;
@@ -176,11 +188,11 @@ int main()
 		a[i] = i + 1;
 	}
     
-//	ysfh_array(a, n, m);
+    // ysfh_array(a, n, m);
 
-    ysfh_list(a, n, m);
+    // ysfh_list(a, n, m);
 
-	// printf("%d\n", ysfh_recursive(n, m));
+    printf("%d\n", ysfh_recursive(n, m));
 
 
 
