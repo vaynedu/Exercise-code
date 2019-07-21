@@ -4,46 +4,20 @@ welcome to file lists
 ====
 auto_update and last_modify: 2019-03-10 17:03:49
 -------
-## 一、Algorithms<br>
->> ####    1.100!.txt
->> ####    2.10进制转化16进制.txt
->> ####    3.12345.txt
->> ####    4.16进制转化10进制.txt
->> ####    5.cls.txt
->> ####    6.hash.txt
->> ####    7.k
->> ####    8.lcs.txt
->> ####    9.malloc.txt
->> ####    10.n数的最大乘积.txt
->> ####    11.package_01.txt
->> ####    12.全排列.txt
->> ####    13.删除数组0元素.txt
->> ####    14.动态数组.txt
->> ####    15.区间k大数.txt
->> ####    16.十六进制转八进制
->> ####    17.回文数.txt
->> ####    18.复述归.txt
->> ####    19.大小写转化.txt
->> ####    20.字数组最大和算法.txt
->> ####    21.完全背包.txt
->> ####    22.平时代码.txt
->> ####    23.排序.txt
->> ####    24.数列排序.txt
->> ####    25.数据结构.txt
->> ####    26.最大K乘积.txt
->> ####    27.最小乘积.txt
->> ####    28.格子刷油漆.txt
->> ####    29.每天一到算法题.txt
->> ####    30.每天一道算法2.txt
->> ####    31.每天一道算法3.txt
->> ####    32.每天一道算法4.txt
->> ####    33.矩阵乘法.txt
->> ####    34.第二大整数.txt
->> ####    35.节点选择.txt
->> ####    36.蓝桥杯.txt
->> ####    37.逆序排列.txt
->> ####    38.错误票据.txt
->> ####    39.静态成员.txt
+
+
+## 一、data-struct<br>
+>> ####  [dynamic_array C语言实现动态数组](https://github.com/lotluck/Exercise-code/tree/master/data-structure/dynamic_array)
+>> ####  dlist_stack 利用双端链表实现栈
+>> ####  dlist_queue 利用双端链表实现队列
+>> ####  dlist_hash  利用双端链表实现hash
+>> ####  dlist       双端链表的使用
+>> ####  rbtree      红黑树
+>> ####  gen_list    广义表
+>> ####  ctr_list    单链表的操作
+>> ####  binary_tree 二叉树相关操作
+>> ####  b_tree      B树
+>> ####  avl_tree    avl树
 
 
 
