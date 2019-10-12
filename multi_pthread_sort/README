@@ -1,0 +1,12 @@
+1.进入到multi_pthread_sort目录直接make,那么直接可以编译好，
+在bin下生成可执行文件multi_pthread_sort，如果想运行，
+./multi_pthread_sort  数字
+既可以运行程序
+
+
+2 如果想删除可执行文件
+make clean 
+
+
+3 other_sort 中有测各种排序的代码，其中sort.c是各种排序代码的集合，
+tool.c和tool.h文件就是简单的包裹函数，也算是简单封装吧
